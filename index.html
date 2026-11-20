@@ -10,14 +10,60 @@
 </head>
 
 <body>
+    <h1>Loot Items System</h1>
+    <div>
+        <h2>Entry Form</h2>
+        <form action="#message"></form>
+    </div>
+
+    <form class="conversion">
+        <label for="lootName">Loot:</label>
+        <input type="text" placeholder="Loot Name" id="lootName" name ="Conversion">
+        <label for="lootValue">Value</label>
+        <input type="number" placeholder="Loot Value" id="lootValue" name="Conversion">
+        <input type="submit" value="Add Loot">
+    </form>
+
+
+    <table style="width: 300px; height: 40px; text-align: center;">
+        <tr> 
+            <th>LootItem</th>
+            <th>ItemValue</th>
+        </tr>
+        <tr> <!--Temp-->
+            <td>stick</td>
+            <td>300</td>
+        </tr>
+        <tr> <!--Temp-->
+            <td>cup</td>
+            <td>300</td>
+        </tr>
+        <tr style="text-align: end;">
+            <td id="totalValue" colspan="2">0</td>
+        </tr>
+    </table>
+
+    <section>
+        <h2>_Loot Items_</h2>
+        <p id="items">Item 0</p>
+        <p id="items">Item 1</p>
+        <p id="items">Item 2</p>
+        <p id="totalValue">Total value: </p>
+    </section>
+    
+    <section>
+        <h2>Message</h2>
+        <p id="Message"></p>
+    </section>
+
     <!-- Create an HTML page containing:
 
-A text input for the loot item's name.
-A number input for the loot item's value.
-A button labeled Add Loot.
-A visible area displaying all loot items entered.
-A visible area displaying the total value of the loot.
-An area for displaying input-validation messages.
+-A text input for the loot item's name.
+-A number input for the loot item's value.
+-A button labeled Add Loot.
+-A visible area displaying all loot items entered. <section>
+A visible area displaying the total value of the loot. <section>
+An area for displaying input-validation messages. <Section
 
 
 File paths and referenced assets work correctly.
