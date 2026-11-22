@@ -93,8 +93,9 @@ Use object properties to retrieve the name and value of each loot item. (((not f
 const lootItems = []
 const messageCodes = [
     '<p id="message" style="color: green">Loot added successfully</p>',
-    '<p id="message style="color: red">This item already exists</p>',
+    '<p id="message" style="color: red">Please enter item name</p>',
     '<p id="message style="color: red">Please enter a valid positive number.</p>',
+    '<p id="message style="color: red">This item already exists</p>',
     '<p id="message style="color: red">Please enter a loot item name.</p>'
 ] //to be used with innerHTML
 
@@ -104,20 +105,26 @@ submitButton.addEventListener('click', updateDom)
 function updateDom() {
     let item = document.getElementById('lootName').value
     let value = parseInt(document.getElementById('lootValue').value)
+
     console.log('log check for new item & value', item, value)
     let message = document.getElementById('Message')
+
     console.log('message before altering:',message.outerHTML)
-    let validity = validEntry(item, value)
+    let validity = validEntry(item, value) //returns str
     
     if (validity === 'valid') { 
-        console.log('Valid')
+        console.log('Valid, item will procees to repeat func') 
         newItem = {item,value}
         repeat = repeatName(newItem, lootItems)
 
         if (repeat === false){
             lootItems.push(newItem)
-            message.innerHTML = messageCodes[0]//'<p id="message" style="color: green">Loot added successfully</p>'
+            message.innerHTML = messageCodes[0]
             console.log('new message', message)
+        }
+        else {
+            console.log('item is repeated, and rejected')
+            message.innerHTML = messageCodes[3]
         }
 }
     else {
@@ -125,17 +132,18 @@ function updateDom() {
         message.style.color = 'red'
         message.innerHTML = validity
     }
+    console.log(lootItems)
 }
 
-function validEntry(item, value) {
+function validEntry(item, value) { //works
     // Valid num value greater than 
-    validity = true
+    validity = 'valid'
     if (item === '') {
-        validity = false
+        validity = messageCodes[1]
         return validity
     }
     else if (isNaN(value) || value <= 0){
-        valid = false 
+        validity = messageCodes[2]
         return validity
         //building input validation
     }
@@ -155,14 +163,7 @@ function repeatName(newObj, lootItems) {
             'mandatory else block. Nothing to do here..'
         }
     }
-    //I can probably nest this and return false outside the for loop
-    if (repeat === true) {
-        return repeat
-    }
-    else {
-        return repeat
-        lootItems.push(newObj)
-    }
+    return repeat
 }
 
 
