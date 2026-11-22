@@ -96,7 +96,7 @@ section.message {
     text-align: center;
 }
 section.message p {
-    color: red;
+    color: gray;
     font-size: 20px;
     margin: 10px;
 }
