@@ -6,64 +6,54 @@
     <meta name="author" content="Emmanuelle">
     <title>LootSystemTerminal2Interface</title>
 
-    <link rel="stylesheet" href="./css/styles">
+    <link rel="stylesheet" href="./css/styles.css">
+    
 </head>
 
 <body>
-    <h1>Loot Items System</h1>
-    <div>
-        <h2>Entry Form</h2>
-        <form action="#message"></form>
-    </div>
+    <main>
+        <h1>Loot Item System</h1>
 
-    <form class="conversion">
-        <label for="lootName">Loot:</label>
-        <input type="text" placeholder="Loot Name" id="lootName" name ="Conversion">
-        <label for="lootValue">Value</label>
-        <input type="number" placeholder="Loot Value" id="lootValue" name="Conversion">
-        <input type="submit" value="Add Loot">
-    </form>
-
-
-    <table style="width: 300px; height: 40px; text-align: center;">
-        <tr> 
-            <th>LootItem</th>
-            <th>ItemValue</th>
-        </tr>
-        <tr> <!--Temp-->
-            <td>stick</td>
-            <td>300</td>
-        </tr>
-        <tr> <!--Temp-->
-            <td>cup</td>
-            <td>300</td>
-        </tr>
-        <tr style="text-align: end;">
-            <td id="totalValue" colspan="2">0</td>
-        </tr>
-    </table>
-
-    <section>
-        <h2>_Loot Items_</h2>
-        <p id="items">Item 0</p>
-        <p id="items">Item 1</p>
-        <p id="items">Item 2</p>
-        <p id="totalValue">Total value: </p>
-    </section>
+        <form class="loot-form">
+            <fieldset>
+                <legend>Enter Loot Item</legend>                
+                <label for="lootName">Loot:</label>
+                <input type="text" placeholder="Loot Name" id="lootName" name ="lootName">
+                <label for="lootValue">Value</label>
+                <input type="number" placeholder="Loot Value" id="lootValue" name="lootValue">
+                <input id="submitButton" type="submit" value="Add Loot">
+            </fieldset>
+        </form>       
     
-    <section>
-        <h2>Message</h2>
-        <p id="Message"></p>
-    </section>
 
+
+        <section class="lootItems">
+            <h2>Loot Items</h2>
+            <ul id="itemsList">
+                <!-- place holders for testing -->
+                <li>black shoe</li>
+                <li></li>
+            </ul>
+        </section>
+        
+        <section class="totalValue">
+            <h2>Total value: </h2>
+            <p id="totalValue">0</p>
+        </section>
+
+        <section class="message">
+            <h2>Message:</h2>
+            <p id="Message">No current message</p>
+        </section>
+    </main>
     <!-- Create an HTML page containing:
 
 -A text input for the loot item's name.
 -A number input for the loot item's value.
 -A button labeled Add Loot.
 -A visible area displaying all loot items entered. <section>
-A visible area displaying the total value of the loot. <section>
-An area for displaying input-validation messages. <Section
+-A visible area displaying the total value of the loot. <section>
+-An area for displaying input-validation messages. <Section
 
 
 File paths and referenced assets work correctly.
