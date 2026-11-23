@@ -6,14 +6,14 @@ const messageCodes = [
     'Please enter loot item name',
     'Please enter a valid positive number.',
     'This item already exists',
-] //updates for elementId 'Message', 
+] //indexed array for updates to elementId 'Message', 
 //considering making these objects with {name:'msg', message:'str', color:'###'} to fix nested <p> tag & redundant code,
 
 const submitButton = document.getElementById('submitButton')
 submitButton.addEventListener('click', updateDom)
 
 function updateDom() {
-    const item = document.getElementById('lootName').value
+    const name = document.getElementById('lootName').value
     const value = parseInt(document.getElementById('lootValue').value)
     const message = document.getElementById('Message')
     const ulItems = document.getElementById('itemsList')
@@ -22,15 +22,15 @@ function updateDom() {
 
 
 
-    console.log(`Entered new item & value: ${item}:${value}\n`,
+    console.log(`Entered new item & value: ${name}:${value}\n`,
         'message before altering:',message.outerHTML)
 
-    const validity = validEntry(item, value) //returns str
+    const validity = validEntry(name, value) //returns str
     
     if (validity === 'valid') { 
         console.log('Valid item, proceeding to check repeat >>') 
-        const newItem = {item,value}
-        repeat = repeatName(newItem, lootItems)
+        const newItem = {name,value}
+        let repeat = repeatName(newItem, lootItems)
 
         if (!repeat){ // Adds new object to list only if not repeated or invalid
             console.log('Item not repeated, adding to list')
@@ -38,7 +38,7 @@ function updateDom() {
 
             ulItems.innerHTML = '' //resets inner elements before looping list
             for (let i=0; i<lootItems.length; i++) {
-                ulItems.innerHTML = ulItems.innerHTML + (`<li>${lootItems[i].item} - ${lootItems[i].value}</li>`)
+                ulItems.innerHTML = ulItems.innerHTML + (`<li>${lootItems[i].name} - ${lootItems[i].value}</li>`)
             }
 
             let totals = 0
@@ -92,7 +92,7 @@ function validEntry(item, value) { // simple str and int validation
 function repeatName(newObj, lootItems) { //checks for repeat and exits early if so
     let repeat = false
     for (let i=0; i<lootItems.length; i++) {
-        if (newObj.item.toLowerCase() === lootItems[i].item.toLowerCase()) {
+        if (newObj.name.toLowerCase() === lootItems[i].name.toLowerCase()) {
             repeat = true
             break        
         }
@@ -103,6 +103,8 @@ function repeatName(newObj, lootItems) { //checks for repeat and exits early if 
     return repeat
 }
 
-// #TODO final touches
-// 
+
+/*Debugging Reflection:  short comment explaining what you observed, when the application's state changed, and when the screen updated.
+
+When using the debugging tool in chrome browser, I was able to watch the variable values update live. Whenever a variable was used in a camparison, the actual value of the variable being compared was displayed next to the caprison, so I'd be able to see if I was making a valid comparison. It wasn't until I stepped over the portion where the DOM actually gets manipulated, when there were visual changes to the actual HTML. */
 // // End of JS
