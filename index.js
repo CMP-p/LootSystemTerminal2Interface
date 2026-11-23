@@ -18,22 +18,22 @@ function updateDom() {
     const message = document.getElementById('Message')
     const ulItems = document.getElementById('itemsList')
     const totalValue = document.getElementById('totalValue')
-    // console.log('total value', totalValue, typeof totalValue)
+    console.log('total value', totalValue, typeof totalValue)
 
 
 
-    // console.log(`Entered new item & value: ${name}:${value}\n`,
-    //     'message before altering:',message.outerHTML)
+    console.log(`Entered new item & value: ${name}:${value}\n`,
+        'message before altering:',message.outerHTML)
 
     const validity = validEntry(name, value) //returns str
     
     if (validity === 'valid') { 
-        // console.log('Valid item, proceeding to check repeat >>') 
+        console.log('Valid item, proceeding to check repeat >>') 
         const newItem = {name,value}
         let repeat = repeatName(newItem, lootItems)
 
         if (!repeat){ // Adds new object to list only if not repeated or invalid
-            // console.log('Item not repeated, adding to list')
+            console.log('Item not repeated, adding to list')
             lootItems.push(newItem)
 
             ulItems.innerHTML = '' //resets inner elements before looping list
@@ -48,32 +48,32 @@ function updateDom() {
             }
             message.style.color = 'green'
             message.innerHTML = messageCodes[0]
-            // console.log('new message', message.innerHTML)
+            console.log('new message', message.innerHTML)
 
         }
         else {
-            // console.error('item is repeated, and rejected', repeat)
+            console.error('item is repeated, and rejected', repeat)
             message.style.color = 'red'
             message.innerHTML = messageCodes[3]
         }
     }
     // error messages depending on error
     else if (validity === messageCodes[1]) {
-        // console.error('missing item name')
+        console.error('missing item name')
         message.style.color = 'red'
         message.innerHTML = validity
     }
     else if (validity === messageCodes[2]) {
-        // console.error('missing item value')
+        console.error('missing item value')
         message.style.color = 'red'
         message.innerHTML = validity
     }
     else {
-        // console.error('Fatal fundamental Error')
+        console.error('Fatal fundamental Error')
         message.innerHTML = 'ERROR'
     }
 
-    // console.log(`new list length ${lootItems.length}\n actual array:`, lootItems,'\n')
+    console.log(`new list length ${lootItems.length}\n actual array:`, lootItems,'\n')
 }
 
 function validEntry(name, value) { // simple str and int validation
