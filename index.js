@@ -107,6 +107,7 @@ function updateDom() {
     let message = document.getElementById('Message')
     let ulItems = document.getElementById('itemsList')
 
+
     console.log(`Entered new item & value: ${item}:${value}\n`,
         'message before altering:',message.outerHTML)
 
@@ -120,8 +121,17 @@ function updateDom() {
         if (!repeat){
             console.log('Item not repeated, adding to list')
             lootItems.push(newItem)
+            ulItems.innerHTML = '' //resets inner elements before looping list
+            for (let i=0; i<lootItems.length; i++) {
+                ulItems.innerHTML = ulItems.innerHTML + (`<li>${lootItems[i].item} - ${lootItems[i].value}</li>`)
+            }
+            for (let i=0; i<lootItems.length; i++) {
+                //total value
+            }
+            // message.style.color = 'green'
             message.innerHTML = messageCodes[0]
             console.log('new message', message.innerHTML)
+
         }
         else {
             console.error('item is repeated, and rejected')
@@ -164,7 +174,7 @@ function validEntry(item, value) { //works
 function repeatName(newObj, lootItems) {
     let repeat = false
     for (let i=0; i<lootItems.length; i++) {
-        if (newObj.item === lootItems[i].item) {
+        if (newObj.item.toLowerCase === lootItems[i].item.toLowerCase) {
             repeat = true
             break        
         }
