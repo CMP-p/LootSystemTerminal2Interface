@@ -93,10 +93,9 @@ Use object properties to retrieve the name and value of each loot item. (((not f
 const lootItems = []
 const messageCodes = [
     '<p id="message" style="color: green">Loot added successfully</p>',
-    '<p id="message" style="color: red">Please enter item name</p>',
-    '<p id="message style="color: red">Please enter a valid positive number.</p>',
-    '<p id="message style="color: red">This item already exists</p>',
-    '<p id="message style="color: red">Please enter a loot item name.</p>'
+    '<p id="message" style="color: red">Please enter loot item name</p>',
+    '<p id="message" style="color: red">Please enter a valid positive number.</p>',
+    '<p id="message" style="color: red">This item already exists</p>',
 ] //to be used with innerHTML
 
 const submitButton = document.getElementById('submitButton')
@@ -105,34 +104,44 @@ submitButton.addEventListener('click', updateDom)
 function updateDom() {
     let item = document.getElementById('lootName').value
     let value = parseInt(document.getElementById('lootValue').value)
-
-    console.log('log check for new item & value', item, value)
     let message = document.getElementById('Message')
+    let ulItems = document.getElementById('itemsList')
 
-    console.log('message before altering:',message.outerHTML)
+    console.log(`Entered new item & value: ${item}:${value}\n`,
+        'message before altering:',message.outerHTML)
+
     let validity = validEntry(item, value) //returns str
     
     if (validity === 'valid') { 
-        console.log('Valid, item will procees to repeat func') 
+        console.log('Valid item, proceeding to check repeat >>') 
         newItem = {item,value}
         repeat = repeatName(newItem, lootItems)
 
-        if (repeat === false){
+        if (!repeat){
+            console.log('Item not repeated, adding to list')
             lootItems.push(newItem)
             message.innerHTML = messageCodes[0]
-            console.log('new message', message)
+            console.log('new message', message.innerHTML)
         }
         else {
-            console.log('item is repeated, and rejected')
+            console.error('item is repeated, and rejected')
             message.innerHTML = messageCodes[3]
         }
 }
-    else {
-        console.log(message)
+    else if (validity == messageCodes[1]) {
+        console.error('missing item name')
         message.style.color = 'red'
         message.innerHTML = validity
     }
-    console.log(lootItems)
+    else if (validity == messageCodes[2]) {
+        console.error('missing item value')
+        message.style.color = 'red'
+        message.innerHTML = validity
+    }
+    else {
+        console.error('Fatal fundamental Error')
+    }
+    console.log(`new list length ${lootItems.length}\n actual array:`, lootItems,'\n')
 }
 
 function validEntry(item, value) { //works
@@ -155,7 +164,7 @@ function validEntry(item, value) { //works
 function repeatName(newObj, lootItems) {
     let repeat = false
     for (let i=0; i<lootItems.length; i++) {
-        if (newObj.name === lootItems[i].name) {
+        if (newObj.item === lootItems[i].item) {
             repeat = true
             break        
         }
