@@ -106,6 +106,9 @@ function updateDom() {
     let value = parseInt(document.getElementById('lootValue').value)
     let message = document.getElementById('Message')
     let ulItems = document.getElementById('itemsList')
+    let totalValue = document.getElementById('totalValue')
+    console.log('total value', totalValue, typeof totalValue)
+
 
 
     console.log(`Entered new item & value: ${item}:${value}\n`,
@@ -125,7 +128,12 @@ function updateDom() {
             for (let i=0; i<lootItems.length; i++) {
                 ulItems.innerHTML = ulItems.innerHTML + (`<li>${lootItems[i].item} - ${lootItems[i].value}</li>`)
             }
+            let totals = 0
             for (let i=0; i<lootItems.length; i++) {
+                totals += lootItems[i].value
+                totalValue.innerHTML = totals
+
+
                 //total value
             }
             // message.style.color = 'green'
@@ -134,7 +142,7 @@ function updateDom() {
 
         }
         else {
-            console.error('item is repeated, and rejected')
+            console.error('item is repeated, and rejected', repeat)
             message.innerHTML = messageCodes[3]
         }
 }
@@ -164,7 +172,6 @@ function validEntry(item, value) { //works
     else if (isNaN(value) || value <= 0){
         validity = messageCodes[2]
         return validity
-        //building input validation
     }
     else {
         return validity
@@ -174,7 +181,7 @@ function validEntry(item, value) { //works
 function repeatName(newObj, lootItems) {
     let repeat = false
     for (let i=0; i<lootItems.length; i++) {
-        if (newObj.item.toLowerCase === lootItems[i].item.toLowerCase) {
+        if (newObj.item.toLowerCase() === lootItems[i].item.toLowerCase()) {
             repeat = true
             break        
         }
