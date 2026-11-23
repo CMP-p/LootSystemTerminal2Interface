@@ -2,10 +2,10 @@
 
 const lootItems = []
 const messageCodes = [
-    '<p id="message" style="color: green">Loot added successfully</p>',
-    '<p id="message" style="color: red">Please enter loot item name</p>',
-    '<p id="message" style="color: red">Please enter a valid positive number.</p>',
-    '<p id="message" style="color: red">This item already exists</p>',
+    'Loot added successfully',
+    'Please enter loot item name',
+    'Please enter a valid positive number.',
+    'This item already exists',
 ] //updates for elementId 'Message', 
 //considering making these objects with {name:'msg', message:'str', color:'###'} to fix nested <p> tag & redundant code,
 
@@ -46,13 +46,14 @@ function updateDom() {
                 totals += lootItems[i].value
                 totalValue.innerHTML = totals
             }
-            // message.style.color = 'green'
+            message.style.color = 'green'
             message.innerHTML = messageCodes[0]
             console.log('new message', message.innerHTML)
 
         }
         else {
             console.error('item is repeated, and rejected', repeat)
+            message.style.color = 'red'
             message.innerHTML = messageCodes[3]
         }
     }
@@ -102,6 +103,6 @@ function repeatName(newObj, lootItems) { //checks for repeat and exits early if 
     return repeat
 }
 
-// #TODO Fix innerhtml by passing only a value
+// #TODO final touches
 // 
 // // End of JS
